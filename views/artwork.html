@@ -1,0 +1,22 @@
+{% extends 'master.html' %}
+{% block content %}
+<!-- This is the container for images that will be in the lightbox gallery -->
+<link rel="stylesheet" media="screen" href="/css/lightbox.css">
+<div class="span8 offset1">
+	<h2>{{ piece.title }}</h2>
+	<p><small>See any image in more detail by clicking on it. Use keyboard arrows (&larr;, &rarr;, or mouse to cycle through the photos.</p>
+	<ul class="thumbnails">
+{% for photo in piece.photos %}
+		<li class="span4">
+				<a href="/img/{{ photo.key().id() }}?w=800&h=500" rel="lightbox[gallery]" data-id="{{ photo.key().id() }}" class="thumbnail sub-photo">
+					<img class="gallery-item" src="{{ photo.url() }}=s360" />
+				</a>
+		</li>
+{% endfor %}
+	</ul>
+<input id="piece-id" type="hidden" value="{{ piece.key().id() }}">
+<p><a id="backnav" class="btn btn-mini" href="#">back to list</a></p>
+</div> <!-- row for thumbnails -->
+<script src="/scripts/lightbox.js"></script>
+<script src="/scripts/artwork.js"></script>
+{% endblock %}

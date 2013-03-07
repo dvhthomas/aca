@@ -1,0 +1,59 @@
+{% extends 'master.html' %}
+{% block content %}
+<div class="row">
+	<!-- First column -->
+	<div class="span5">
+		<h2>Gallery Management</h2>
+		<p>Keep your virtual gallery up to date:</p>
+		<ul>
+			<li><p><a href="/admin/create">Create a <strong>new</strong> artwork</a></p></li>
+			<li><p><a href="/admin/list">Manage existing gallery</a>&mdash;Update and remove existing artworks</p></li>
+			<li><p><a href="/admin/slideshow">Manage slideshow pictures</a></p></li>
+			<li><p><a href="/admin/about">About Page configuration</a>&mdash;Choose a photo, write some copy</p></li>
+		</ul>
+		<h2>Initial Setup</h2>
+		<p>When the site is first deployed, you need to load up the basic data for the gallery like default art mediums. You should only need to do this once.<p>
+		<div class="alert alert-danger">
+			<h4 class="alert-heading">Warning: only press this button if you know what you&rsquo;re doing!</h4>
+			<p>This will remove all existing art mediums and create new ones.</p>
+		<form id="seed" action="/admin/seed" method="post">
+			<button type="submit" class="btn btn-danger">Do one time setup</button>
+		</form>
+	</div> <!-- first column -->
+
+	<!-- Second column -->
+	<div class="span5">
+	<h2>Image Size Calculator</h2>
+	<p>So you want to upload a photo? You need to make sure that the width-to-height ratio is as close to 1.61:1 as you can make it. That is the <a href="http://en.wikipedia.org/wiki/Golden_ratio" target="_none">Golden Ratio</a>, meaning is just looks right.</p>
+	<table class="table table-condensed">
+		<caption>Sizes used in this site</caption>
+		<thead>
+			<tr><th>Location</th><th>Width (pixels)</th></tr>
+		</thead>
+		<tbody>
+			<tr><td>Home page slide show</td><td>700</td></tr>
+			<tr><td>Gallery listing per category, e.g., sculpture &rarr; figurative</td><td>460</td></tr>
+			<tr><td>Individual artwork pages having multiple photos of one piece</td><td>360</td></tr>
+		</tbody>
+	</table>
+
+	<form id="height-calc" class="well">
+		<h4>Height Calculator</h4>
+		<p>Type in the <strong>width</strong> of your existing image to see what is the right height to crop to.</p>
+		<input type="text" id="width" name="width" placeholder="Width in whole numbers, e.g., 434" />
+		&nbsp;&divide;&nbsp;
+		<span>1.61</span>
+		<p>Height: <span id="height-answer"></span></p>
+	</form>
+	<form id="width-calc" class="well">
+		<h4>Width Calculator</h4>
+		<p>Type in the <strong>height</strong> of your existing image to see what is the right width to crop to.</p>
+		<input type="text" id="height" name="height" placeholder="Height in whole numbers, e.g., 434" />
+		&nbsp;&times;&nbsp;
+		<span>1.61</span>
+		<p>Width: <span id="width-answer"></span></p>
+	</form >
+</div> <!-- second column -->
+</div> <!-- row -->
+<script src="scripts/admin.js"></script>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'master.html' %}
+{% set current_page = "/" %}
+{% block content %}
+<link rel="stylesheet" media="screen" href="/css/lightbox.css">
+<div class="row">
+{% if artworks %}
+	{%- for piece in artworks %}
+	<div id="{{ piece.key().id() }}" class="piece-info">
+	<div class="span6 well gallery-photo">
+		{% if piece.hasPhotos() %}
+		<a class="piece-info thumbnail" rel="lightbox[{{ piece.key() }}]" href="/gallery/{{ piece.key().id() }}?w=800&h=600" data-id="{{ piece.photos[0].key().id() }}">
+			<img src="{{ piece.photos[0].url() }}=s460" alt="{{ piece.title }}"/>
+		</a>
+		{% else %}
+		<span class="piece-info thumbnail" href="/gallery/{{piece.key().id() }}">
+			<img src="http://placehold.it/460x286&text=no+views" alt="{{ piece.title }}"/>
+		</span>
+		{% endif %}
+	</div>
+	<div class="span4 piece-detail">
+		<h3>{{ piece.title }}</h3>
+		{%- if piece.year_completed %}
+		<p>{{ piece.year_completed }}</p>
+		{% endif -%}
+		{%- if piece.dimensions != '' %}
+		<p>{{ piece.dimensions|e}}</p>
+		{% endif -%}
+		{%- if piece.art_medium_details %}
+		<p>{{ piece.art_medium_details }}</p>
+		{% endif -%}
+		{%- if piece.description %}
+		<p>{{ piece.description }}</p>
+		{% endif -%}
+		<p>{{ piece.formatted_price() }}</p>
+		<p>{%- if piece.for_sale %}
+			<span class="label label-success">for sale</span>
+			{% else %}
+			<span class="label">sold</span>
+			{% endif -%}</p>
+			{% if piece.photos %}
+				{% if piece.photos.count() > 1 %}
+				<p class="piece-detail-more"><a href="/gallery/{{ piece.key().id() }}">more views&nbsp;&raquo;</a></p>
+				{% endif %}
+			{% endif %}
+	</div>
+</div>
+	{% endfor %}
+</div> <!-- row -->
+<div class="row">
+	<div class="span5">
+		<p><a id="scroller" class="btn btn-mini" href="#">back to top</a></p>
+	</div>
+</div>
+{% else %}
+<p>No pieces have been categorized as <strong>{{ art_type|e }}
+	{%- if art_subtype %}&nbsp;&rarr;&nbsp;{{ art_subtype|e }}{% endif -%}</strong>.</p>
+{% endif %}
+<script src="/scripts/lightbox.js"></script>
+<script src="/scripts/gallery.js"></script>
+{% endblock %}

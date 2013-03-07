@@ -1,0 +1,28 @@
+{% extends 'master.html' %}
+{% set current_page = "/contact" %}
+{% block content %}
+<div class="row">
+    <div class="span6 columns">
+		<h2>contact the artist</h2>
+        <p>To purchase Autumn's art for your personal or business collection please use the form below to contact us, or send an email direct to the address listed to the right.</p>
+        <form action="/contact" method="post" class="form-stacked">
+			<label for="your-email">Your email address</label>
+			<input class="span5" id="email" name="from" type="email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="you@email.com" required />
+			<label for="message">What kind of piece are you hoping for?</label>
+			<textarea class="span5" required id="message" name="message" rows="15" placeholder="Choose a piece of Autumn's for sale artwork or please go right ahead and commission your very own piece!"></textarea><br/>
+			<button type="submit" class="btn btn-primary">Send message</button>
+        </form>
+    </div>
+    <div class="span4">
+        <div class="splashy">
+            <p>or</p>
+            <p>info[at]autumnchristieart.com</p>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+$(function() {
+    $('#email').focus();
+});
+</script>
+{% endblock %}

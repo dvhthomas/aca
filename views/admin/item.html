@@ -1,0 +1,18 @@
+{% extends 'master.html' %}
+{% block content %}
+<h2>{{ piece.title }}</h2>
+<h3>{{ piece.artist }}</h3>
+<form id="delete_form" action="/admin/artwork/{{ piece.key().id() }}" method="post" accept-charset="utf-8">
+	<input type="hidden" name="_method" value="delete"/>
+	<a class="btn" href="/admin/artwork/{{ piece.key().id() }}/edit"><i class="icon-pencil"></i>&nbsp;update</a>
+	<button class="btn btn-small btn-danger" type="submit"><i class="icon-white icon-trash"></i>&nbsp;Delete</button>
+</form>
+<p>Medium: {{ piece.art_medium }}, {{ piece.art_medium_subtype }}</p>
+<p>Medium details: {{ piece.art_medium_details }}</p>
+<p>For sale: {{ piece.for_sale }}</p>
+<p> Price: {{ piece.price }}&nbsp;{{ piece.currency }}</p>
+{% for photo in piece.photos %}
+<img src="{{ photo.url() }}" /><br/>
+{% endfor %}
+<script src="/scripts/editor.js"></script>
+{% endblock %}

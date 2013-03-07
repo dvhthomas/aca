@@ -1,0 +1,57 @@
+{% extends 'master.html' %}
+{% import 'macros.html' as forms %}
+{% block content %}
+<div class="span9">
+<h2 id="heading">Create a new artwork</h2>
+<form action="{{ blob_url }}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+	<input type="hidden" name="_method" value="post" />
+	<label for="title">Title</label>
+	<input type="text" name="title" class="span6" required placeholder="Title of piece"></input>
+	<label for="created">Year created</label>
+	<input type="text" name="created" class="span6" pattern="\d{4}" required placeholder="Four digit year, e.g., 2010">
+	<label for="description">Description</label><br/>
+	<textarea class="span6" name="description" rows="8" cols="40" placeholder="Something descriptive."></textarea><br/>
+	<label for="medium">Medium</label>
+	<select name="art_type" class="span6">
+{%- for top_level in art_types %}
+	<optgroup label="{{ top_level[0][1]|e }}">
+	{%- for sub_type in top_level[1] %}
+		{% if top_level[0][0] == 'paint' and sub_type[0] == 'other' %}
+			<option value="{{ top_level[0][0]|e}}|{{sub_type[0]}}" selected="selected">{{ sub_type[1]}}</option>
+		{% else %}
+			<option value="{{ top_level[0][0]|e}}|{{sub_type[0]}}">{{ sub_type[1]}}</option>
+		{% endif %}
+	{%- endfor %}
+{%- endfor %}
+	</select>
+	<label for="medium_details">Medium details</label><br/>
+	<textarea class="span6" name="medium_details" rows="8" cols="40" placeholder="E.g., oil on canvas"></textarea><br/>
+	<label for="artist">Artist</label>
+	<input type="text" class="span6" name="artist" value="Autumn Christie" required placeholder="Artist name">
+	<label for="dimensions">Dimensions</label>
+	<input type="text" class="span6" name="dimensions" value="" required placeholder="10 x 34 x 2, for example">
+	<label for="price">Price</label>
+	<input type="text" class="span3" name="price" pattern="\d+(\.\d{2})?" value="0.00" required placeholder="The price and currency">
+	<select name="currency" class="span2">
+{% for c in artwork.CURRENCIES %}
+	{% if c == 'GBP' %}
+		<option selected value="{{ c }}">{{ c }}</option>
+	{% else %}
+		<option value="{{ c }}">{{ c }}</option>
+	{% endif %}
+{% endfor %}
+	</select>
+	<label for="for_sale">For sale</label><br/>
+	{{ forms.check_box('for_sale', value=True, checked=True) }}
+	<br/>
+	<fieldset class="well">
+	<legend>Gallery photos:</legend>
+		<input class="span6" type="file" name="photo" value=""><br/>
+		<p><a href="#" id="add_file">Add another photo</a></p>
+	</fieldset>
+	<button class="btn btn-primary btn-large" type="submit"><i class="icon-white icon-picture"></i>&nbsp;Create</button>
+	<a href="/admin/list" class="btn btn-small">Cancel</a> 
+</form>
+</div>
+<script src="/scripts/editor.js"></script>
+{% endblock %}

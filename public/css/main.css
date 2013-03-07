@@ -1,0 +1,159 @@
+body {
+	font-family: Arial, "MS Trebuchet", sans-serif;
+	font-size: 1em;
+}
+p { color:#545454; }
+#header {
+  padding-top:36px;
+  padding-bottom:29px;
+}
+#header h1, #header h2 {
+  color:rgb(140,140,140); /*#787878;*/
+  letter-spacing:0.35em;
+}
+#header h1 {
+  font-size:36px;
+  font-weight: normal;
+  margin-bottom:.0em;
+  padding-left:10px;
+}
+#header h1 a {
+  text-decoration:none;
+  color:rgb(140,140,140); /*#787878;*/
+}
+#header h1 a:hover { color:#b8b8b8; }
+#header h2 {
+  font-weight: normal;
+  font-size:32px;
+  float:right;
+  padding-right:130px;
+  padding-bottom:0px;
+}
+#header .i-decor {
+  position:relative;
+  left:82px;
+  top:-.49em;
+}
+.splashy {
+  padding-top:15em;
+  color:rgb(140,140,140);
+  text-align:center;
+}
+.splashy p {
+  line-height:27px;
+  font-size:18px;
+}
+.logolight { color:#b8b8b8; }
+#nav {
+  font-size:15px;
+  list-style:none;
+  line-height:1;
+  margin:0;
+  padding:0;
+  text-transform:lowercase;
+}
+#nav ul {
+  background-color:#ffffff;
+  list-style:none;
+  line-height:1;
+  margin:0;
+  padding:0;
+}
+#nav a {
+  display:block;
+  text-decoration:none;
+  outline:none;
+  color:#161616;
+  padding-left:10px;
+  line-height: 2em;
+}
+#nav a:hover { color:#b8b8b8; }
+#nav > li {
+  padding-bottom:2px;
+  background-image:url(/assets/navline.png);
+  background-repeat:repeat-x;
+  background-position:0px 1px;
+}
+#nav > li > a {
+	color:#161616;
+	}
+#nav > li > a:hover { color:#b8b8b8; }
+#nav li {
+  float:left;
+  width:8em;
+}
+#nav li ul {
+  color:#545454;
+  border:1px #b8b8b8 solid;
+  position:absolute;
+  font-size:12px;
+  width:12em;
+  left:-999em;
+}
+a#sculpture { padding-left:10px; }
+a#mixed {
+  text-align:right;
+  padding-right:10px;
+}
+a#archive {
+  text-align:right;
+  padding-right:10px;
+}
+a#about {
+  text-align:right;
+  padding-right:15px;
+}
+a#contact {
+  text-align:right;
+  padding-right:10px;
+}
+#nav li:hover ul {
+  left:auto;
+  z-index:2;
+}
+#content {
+  clear:left;
+  padding-bottom:20px;
+  padding-top:30px;
+}
+
+#content h2 {
+	color:rgb(120,120,120);
+	font-weight: normal;
+	}
+
+/* Edit page */
+.piece-image { padding-bottom: 10px; }
+#content .intro { margin-bottom:36px; }
+
+/* textual data about an artwork on the gallery list page */
+.piece-detail {
+	padding-left: 10px;
+	}
+.piece-detail h3 {
+	font-weight: normal;
+	padding-top: 1em;
+	padding-bottom: .5em;
+	}
+.piece-detail-more {
+	padding-top: 1em;
+	}
+.piece-detail h3 {
+	color: #161616;
+	}
+.piece-detail a, .piece-detail a:visited, .piece-detail a:hover {
+	color: #545454;
+	}
+/* Art item page (one piece of art) */
+#piece-detail { color:#161616; }
+#piece-detail h4 { 
+	color: #888;
+	margin-bottom: 1em; }
+#piece-detail blockquote {
+	border:none;
+	margin: 3em 0;
+	}
+blockquote {
+	border:none;
+	margin: 3em 0;
+	}

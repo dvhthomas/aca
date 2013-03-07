@@ -1,0 +1,33 @@
+{% extends 'master.html' %}
+{% set current_page = "/" %}
+{% block content %}
+<div class="row">
+	<div class="span9 offset1">
+{% if photos %}
+<div id="myCarousel" class="carousel">
+	<div class="carousel-inner">
+{%- for photo in photos %}
+	{% if loop.first %}
+			<div class="item active">
+	{% else %}
+			<div class="item">
+	{% endif %}
+				<a href="/gallery/{{ photo.artwork.key().id() }}" title="{{ photo.artwork.title }}">
+					<img src="{{ photo.url() }}=s700"</img>
+					<div class="carousel-caption">
+						<p>{{ photo.artwork.title }}</p>
+					</div> <!-- caption -->
+				</a>
+			</div> <!-- item -->
+{% endfor %}
+	</div> <!-- carousel inner -->
+</div> <!-- slideshow -->
+<p>Click on any of the slides to see details, or use the menu to look at specific types of artwork.</p>
+{% else %}
+<h2>No artworks in slideshow</h2>
+<p>The artist has not yet hand selected images for the world to see. Come back soon!</p>
+{% endif %}
+</div>
+</div>
+<script src="/scripts/slideshow.js"></script>
+{% endblock %}

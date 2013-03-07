@@ -1,0 +1,28 @@
+{% extends 'master.html' %}
+{% import 'macros.html' as forms %}
+{% block content %}
+<h2>Manage Slideshow</h2>
+<p>Choose which images will show up in the home page slideshow. Photos with a landscape orientation (wider that they are tall) will probably look better than portait orientation (taller than they are wide).</p>
+<div id="in-slideshow">
+    <h3>In the slideshow</h3>
+	<p>To <strong>remove</strong> pictures from the slideshow, <strong>uncheck</strong> the box.</p>
+{% for photo in in_show %}
+	<div id="{{ photo.key().id() }}" class="photo">
+		<img src="{{ photo.url() }}=s150" alt="{{ photo.artwork.title }}" />
+		{{ forms.check_box(photo.key().id(), value=True, checked=True) }}
+	</div>
+{% endfor %}
+</div>
+<div id="not-slideshow">
+    <h3>Not in the slideshow</h3>
+	<p>To <strong>add</strong> pictures to the slideshow, <strong>check</strong> the box</</p>
+{% for photo in not_in_show %}
+	<div id="{{ photo.key().id() }}" class="photo">
+		<img src="{{ photo.url() }}=s150" alt="{{ photo.artwork.title }}" />
+		{{ forms.check_box(photo.key().id(), value=False) }}
+	</div>
+{% endfor %}
+</div>
+<script src="/scripts/json2.js"></script>
+<script src="/scripts/manage-slides.js"></script>
+{% endblock %}

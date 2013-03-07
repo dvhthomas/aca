@@ -1,0 +1,21 @@
+{% extends 'master.html' %}
+{% block content %}
+<p><a class="btn btn-large btn-success" href="/admin/create" title="Create"><i class="icon-white icon-picture"></i>&nbsp;Create a work of art</a></p>
+{% for art in artworks %}
+<div class="artwork-item">
+	<h3>{{ art.title }}</h3>
+	<a class="btn" href="/admin/artwork/{{ art.key().id() }}">
+		<i class="icon-eye-open"></i>&nbsp;view</a>
+		<a class="btn" href="/admin/artwork/{{ art.key().id() }}/edit">
+			<i class="icon-pencil"></i>&nbsp;update</a>
+	</p>
+	{% if art.photos %}
+	<ul class="thumbnails">
+		{% for photo in art.photos %}
+		<li><img src="/img/{{ photo.key().id() }}?w=150&h=150" alt="{{ art.title }}" /></li>
+		{% endfor %}
+	</ul>
+	{% endif %}
+</div> <!-- artwork item -->
+{% endfor %}
+{% endblock %}

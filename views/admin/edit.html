@@ -1,0 +1,66 @@
+{% extends 'master.html' %}
+{% import 'macros.html' as forms %}
+{% block content %}
+<h2 id="heading">Update Artwork</h2>
+<form id="delete_form" action="/admin/artwork/{{ piece.key().id() }}" method="post" accept-charset="utf-8">
+	<input type="hidden" name="_method" value="delete"/>
+	<button class="btn btn-danger" type="submit"><i class="icon-white icon-trash"></i>&nbsp;Delete</button>
+	<a class="btn btn-small" href="/admin/list"><i class="icon-th"></i>&nbsp;Cancel</a>
+</form>
+<form action="{{ blob_url }}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+	<input type="hidden" name="_method" value="put">
+	<label for="title">Title</label>
+	<input class="span6" type="text" name="title" required placeholder="Title of piece" value="{{piece.title}}">
+	<label for="created">Year created</label>
+	<input type="text" name="created" class="span6" pattern="\d{4}" required placeholder="Four digit year, e.g., 2010" value="{{ piece.year_completed }}">
+	<label for="description">Description</label>
+	<textarea class="span6" name="description" rows="8" cols="40" placeholder="Something descriptive.">{{ piece.description }}</textarea>
+	<label for="medium">Medium</label>
+	<select class="span6" name="art_type">
+{%- for top_level in art_types %}
+	<optgroup label="{{ top_level[0][1]|e }}">
+	{%- for sub_type in top_level[1] %}
+		{% if top_level[0][0] == piece.art_medium and sub_type[0] == piece.art_medium_subtype %}
+			<option value="{{ top_level[0][0]|e}}|{{sub_type[0]}}" selected="selected">{{ sub_type[1]}}</option>
+		{% else %}
+			<option value="{{ top_level[0][0]|e}}|{{sub_type[0]}}">{{ sub_type[1]}}</option>
+		{% endif %}
+	{%- endfor %}
+	</optgroup>
+{%- endfor%}
+	</select>
+	<label for="medium_details">Medium details</label>
+	<textarea class="span6" name="medium_details" rows="8" cols="40" placeholder="E.g., oil on canvas">{{ piece.art_medium_details }}</textarea>
+	<label for="artist">Artist</label>
+	<input class="span6" type="text" name="artist" value="{{ piece.artist }}" required placeholder="Artist name">
+	<label for="dimensions">Dimensions</label>
+	<input class="span6" type="text" name="dimensions" value="{{ piece.dimensions }}" required placeholder="10 x 23 x 2, for example">
+	<label for="price">Price</label>
+	<input class="span4" type="text" name="price" pattern="\d+(\.\d{2})?" value="{{ "%.2f" % piece.price }}" required placeholder="The price and currency">
+	<select class="span2" name="currency">
+{% for c in artwork.CURRENCIES %}
+{% if c == piece.currency %}
+		<option selected value="{{ c }}">{{ c }}</option>
+{% else %}
+		<option value="{{ c }}">{{ c }}</option>
+{% endif %}
+{% endfor %}
+	</select>
+	<label for="for_sale">For sale</label>
+{% if piece.for_sale %}
+	{{ forms.check_box('for_sale', value=True, checked=True) }}
+{% else %}
+	{{ forms.check_box('for_sale', value=False) }}
+{% endif %}
+	<fieldset class="well">
+	<legend>Gallery photos:</legend>
+{% for photo in piece.photos %}
+<div class="piece-image"><img src="/img/{{ photo.key().id() }}?w=200&h=200" /><br/><button id="{{ photo.key().id() }}" class="btn btn-mini btn-danger delete_picture"><i class="icon-white icon-trash"></i>&nbsp;remove</button></div>
+{% endfor %}
+<a id="add_file" href="#" class="btn btn-small"><i class="icon-picture"></i>&nbsp;Add another photo</a><br/>
+	</fieldset>
+	<br/>
+	<p><button id="update" class="btn btn-large btn-primary" type="submit"><i class="icon-white icon-pencil"></i>&nbsp;Save</button></p>
+</form>
+<script src="/scripts/editor.js"></script>
+{% endblock %}

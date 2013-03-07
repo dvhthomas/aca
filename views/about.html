@@ -1,0 +1,24 @@
+{% extends 'master.html' %}
+{% set current_page = "/about" %}
+{% block content %}
+{% set filler = "<p>Words are not enough; look at the images.</p>" %}
+<div class="row">
+    <div class="span3 offset1 columns">
+		<img  src="/assets/about.jpg">
+    </div>
+    <div class="span5 columns">
+        <h2>about</h2>
+			<p>
+{%- if about %}
+	{%- if about.description %}
+		{{ about.description }}
+	{%- else -%}
+		{{ filler }}
+	{%- endif %}
+{%- else %}
+		{{ filler }}
+{% endif -%}
+			</p>
+    </div>
+</div>
+{% endblock %}

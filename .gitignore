@@ -1,0 +1,6 @@
+Icon
+*.pyc
+*sublime-workspace
+.DS_Store
+*.swp
+*.un~

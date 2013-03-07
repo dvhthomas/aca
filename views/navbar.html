@@ -1,0 +1,24 @@
+<div id="navbar" class="span16 columns">
+    <ul id="nav">
+        <li>
+            <a href="/">Home</a>
+        </li>
+{%- for k,data in artwork.MEDIUMS.items() %}
+		<li>
+			<a href="/{{k}}">{{ data['display'] }}</a>
+			<ul>
+{%- for subtype,display in data['subtypes'].items() %}
+				<li><a href="/{{k}}/{{subtype}}">{{display}}</li>
+{%- endfor %}
+			</ul>
+		</li>
+{%- endfor %}
+        <li>
+            <a id="about" href="/about">About</a>
+        </li>
+        
+        <li>
+            <a id="contact" href="/contact">Contact</a>
+        </li>
+    </ul>
+</div>

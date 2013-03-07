@@ -1,0 +1,10 @@
+{% extends 'master.html' %}
+{% import 'macros.html' as forms %}
+{% block content %}
+<h2 id="heading">Update About Page</h2>
+<form action="/admin/about" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+	<label for="description">Description</label><br/>
+	<textarea class="span6" name="description" rows="8" cols="40" placeholder="Get poetic and describe yourself in ways that would make Vincent van Gogh blush">{%- if about %}{{ about.description}}{% endif -%}</textarea><br/>
+	<p><button id="update" class="btn btn-large btn-primary" type="submit"><i class="icon-white icon-pencil"></i>&nbsp;Save</button></p>
+</form>
+{% endblock %}
